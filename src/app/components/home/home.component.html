@@ -1,0 +1,111 @@
+<div class="body">
+	<aside class="left-sidebar">
+		<div class="logo">
+			<a href="#welcome">
+				<h1>Events_Kz</h1>
+			</a>
+		</div>
+		<nav class="left-nav">
+			<ul id="nav">
+				<li class="current"><a href="#welcome">Добро пожаловать!</a></li>
+				<li><a href="#about-us">О Нас</a></li>
+				<li><a href="#installation-app">У нас есть приложение!</a></li>
+				<li><a href="#gallery">Наша Галлерея</a></li>
+				<li><a href="#how-add-your-event">Как добавить мероприятие?</a></li>
+				<li><a href="#send-event">Организовать МП</a></li>
+			</ul>
+		</nav>
+	</aside>
+
+	<div id="main-wrapper">
+		<div class="main-content">
+
+			<section id="welcome">
+				<div class="content-header">
+					<h1>Добро пожаловать!</h1>
+				</div>
+				<div class="section-content">
+					<p>Данное веб-приложение создается для пользователей, желающих посетить какое-либо мероприятие. </p>
+					<p>С помощью этого приложения пользователь сможет:</p>
+					<ol style="color: white;">
+						<li>- смотреть опубликованые мероприятия</li>
+						<li>- покупать билеты на действующие мероприятия</li>
+						<li>- организовывать свои мероприятия</li>
+						<li>- смотреть мероприятия билеты на которые были приобретены ранее</li>
+					</ol>
+				</div>
+			</section>
+
+			<section id="about-us">
+				<div class="content-header">
+					<h1>О Нас</h1>
+				</div>
+				<div class="section-content">
+					<p style="font-size: 20px; margin-top: 15px;">Угренинов Данил Павлович - Программист</p>
+					<ul style="color: white;">
+						<li><span>Дата рождения:</span> 21 января 2004 г.</li>
+						<li><span>Контакты:</span> danik888844@gmail.com    |    +7 (747) 183-65-90</li>
+						<li><span>Проживаю:</span> г.Алматы, Казахстан</li>
+
+						<p style="font-size: 20px;">Образование</p>
+
+						<li><span>2010-2021 гг.</span> - Школа-Гимназия №103</li>
+						<li><span>2019-2022 гг.</span> - Компьютерная академия ШАГ «Программирование»</li>
+						<li><span>2022- по н.в.</span> -  АФ СПбГУП </li>
+					</ul>
+				</div>
+			</section>
+
+			<section id="installation-app">
+				<div class="content-header">
+					<h1>У нас есть приложение для Вас!</h1>
+				</div>
+				<div class="section-content">
+					<p>
+						Для Вашего удобства существует возможность скачать наше приложение!
+					</p>
+					<p>Все что нужно, так это пройти по <a> ЭТОЙ </a> ссылке если у вас компьютер.</p>
+					<p>Или по <a> ЭТОЙ </a> ссылке если у вас телефон.</p>
+					<p>Так же вы можете найти наше приложение самостоятельно, в плей-маркете. Просто введите в строку поиска "EventsKz".</p>
+				</div>
+			</section>
+
+			<section id="gallery">
+				<div class="content-header">
+					<h1>Наша Галлерея</h1>
+				</div>
+				<div style="margin-top: 20px; margin-bottom: 35px;">
+					<nz-carousel nzAutoPlay>
+						<div nz-carousel-content *ngFor="let index of array" >
+						  <img src="{{index}}" width="90%" style="display: block;
+						  margin-left: auto;
+						  margin-right: auto"/>
+						</div>
+					  </nz-carousel>
+				</div>
+				<div class="embed-responsive embed-responsive-21by9">
+					<iframe class="embed-responsive-item" width="100%" height="650" src="https://www.youtube.com/embed/G4p5OfXWAOQ?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+				</div>	            
+			</section>
+
+			<section id="how-add-your-event">
+				<div class="content-header">
+					<h1>Как добавить своё мероприятия на сайт?</h1>
+				</div>
+				<div class="section-content">
+					<p>Итак, что бы Вам добавить свое мероприятие на наш сайт, нужно перейти во вкладку "Мероприятия" -> далее находим знак "+", после чего заполняем форму и нажимаем кнопку "Добавить". Кнопка "Организовать" ниже, так же переадресует Вас на вкладку "Мероприятия".</p>
+					<p>После этих действий Ваше мероприятие будет отправлено на рассмотрение администрации.</p>
+				</div>
+			</section>
+			
+
+			<section id="send-event">
+				<div class="content-header">
+					<button class="btn btn-prm" 
+					[routerLink]="['/events']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Организовать</button>
+				</div>
+			</section>
+
+		</div>	
+	</div>
+</div>

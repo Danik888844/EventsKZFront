@@ -1,0 +1,113 @@
+<div *ngIf="event == undefined; else elseSection" style="background-color: #333; border: 1px solid #ae850f;">
+    <p class="err-p">HTTP: <span class="err-span">204</span></p>
+    <code><span class="code-span">Sorry </span> <em class="code-em"> No content!</em> </code>
+</div>
+
+<ng-template #elseSection>
+    <div class="body">
+        <div class="content">
+    
+            <button *ngIf="isAdmin" class="btn btn-delete" (click)="deleteEvent()">Удалить</button>
+            <button *ngIf="isAdmin" class="btn btn-edit" (click)="openEdit()">Редактировать</button>
+
+            <!--START EDIT MODAL-->
+            <nz-modal [(nzVisible)]="isVisible" nzTitle="Редактирование мероприятия" (nzOnCancel)="handleCancel()" (nzOnOk)="handleCancel()">
+                <ng-container *nzModalContent>
+
+                    <input type="text" [value]="event.name" placeholder="Название" #name/> <br/>
+                    <textarea type="text" [value]="event.description" placeholder="Описание" #description></textarea> <br/>
+                    <input type="file" [value]="image" accept="image/*" (change)="upload($event)" [(ngModel)]="imgInput"/>
+                    <button class="btn btn-modal" (click)="removeImage()">Удалить фото</button> <br/>
+                    <input type="number" [value]="event.price" placeholder="Цена за билет" #price/> <br/>
+                    <input type="text" [value]="event.numbers.join(',')" placeholder="Номера телефонов через запятую" #numbers/> <br/>
+                    
+                    <agm-map [latitude]="lat" [longitude]="lng" id="map" (mapClick)="mapClicked($event.coords.lat, $event.coords.lng)">
+                    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+                    </agm-map> <br/>
+
+                    <input type="date" [value]="event.eventDate | date:'yyyy-MM-dd'" #eventDate/> <br/>
+
+                    <div>
+                    <label class="switch">
+                        <input type="checkbox" [checked]="isApproved" (change)="isApproved=!isApproved">
+                        <span class="slider round"></span>
+                    </label>
+                    <span *ngIf="isApproved" style="font-size: 20px;">Одобрено</span>
+                    <span *ngIf="!isApproved" style="font-size: 20px;">На рассмотрении</span>
+                    </div>
+
+                    <button class="btn btn-modal" style="width: 50%; border-radius:0%;" 
+                    (click)="editEvent(name.value, description.value, price.value, numbers.value, eventDate.value)">Редактировать</button>
+                </ng-container>
+            </nz-modal>
+            <!--END EDIT MODAL-->
+
+            <section id="welcome">
+                
+                <div class="new-message-box" *ngIf="!isApproved">
+                    <div class="new-message-box-warning">
+                        <div class="info-tab tip-icon-warning" title="error">
+                            <i></i></div>
+                            <div class="tip-box-warning">
+                            <p>Данное мероприятие находится на рассмотрении у администрации. Просьба подождать... </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="new-message-box" *ngIf="isPast">
+                    <div class="new-message-box-warning">
+                        <div class="info-tab tip-icon-warning" title="error">
+                            <i></i></div>
+                            <div class="tip-box-warning">
+                            <p>Данное мероприятие мероприятие уже прошло!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!--HEADER-->
+                <div class="content-header">
+                    <h1>{{event.name}}</h1>
+                </div>
+                <!--START CONTENT-->
+                <div class="section-content">
+
+                    <div style="display: flex;">
+                        <div class="photo" style="flex: 1.7;">
+                            <img *ngIf="event.photos.length == 0; else firstPhoto" 
+                            src="https://thumbs.dreamstime.com/b/no-image-available-icon-photo-camera-flat-vector-illustration-132483141.jpg">
+                            <ng-template #firstPhoto>
+                                <img [src]="event.photos | photo" style="max-height: 900px;"/>
+                            </ng-template>
+                        </div>
+
+                        <div style="margin: 20px 0px 0px 20px; flex: 1;">
+                            <h2><span style="color: #ae850f;">Цена билета: </span> <span style="border-bottom: 1px solid #308824;">{{event.price}}</span>₸</h2> <br />
+                            <h2><span style="color: #ae850f;">Дата мероприятия: </span>{{event.eventDate | date}}</h2> <br />
+                            <h2><span style="color: #ae850f;">Создал: </span> {{owner.firstName}} {{owner.middleName}} {{owner.lastName}}</h2> <br />
+                            <h2><span style="color: #ae850f;">Связь: </span> {{owner.email}} | {{event.numbers}}</h2> <br />
+
+                            <h2><span style="color: #ae850f;">Покупка: </span></h2> <br />
+                            <google-pay-button *ngIf="user && !isPast && isApproved; else elseSection" 
+                            environment="TEST"
+                            buttonSizeMode="fill"
+                            [paymentRequest]="paymentRequest"
+                            (loadpaymentdata)="onLoadPaymentData()" style="width: 100%;"></google-pay-button> <br />
+                            <ng-template #elseSection><button class="btn btn-prm"> Что бы купить билет Вам нужно зайти в аккаунт</button> <br /></ng-template>
+                        </div>
+                    </div>
+
+                    <h2><span style="color: #ae850f;">Описание: </span></h2> <br />
+                    <p class="p">{{event.description}}</p>
+                    
+                    <div class="content-header" style="text-align: left; border-bottom: 0; min-height: 90px; padding: 0;">
+                        <h2><span style="color: #ae850f;">Местонахождение: </span></h2>
+                    </div>
+                    <agm-map [latitude]="event.coordinates.lat" [longitude]="event.coordinates.lng" [zoom]="15">
+                        <agm-marker [latitude]="event.coordinates.lat" [longitude]="event.coordinates.lng"></agm-marker>
+                    </agm-map> 
+                </div>
+                <!--END CONTENT-->
+            </section>
+        </div>
+    </div>
+</ng-template>

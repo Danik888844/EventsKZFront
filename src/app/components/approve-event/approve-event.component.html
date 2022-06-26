@@ -1,0 +1,35 @@
+<div style="margin: 10px;">
+  <div *ngIf="events.length == 0" style="background-color: #333; border: 1px solid #ae850f;">
+    <p class="err-p">HTTP: <span class="err-span">204</span></p>
+    <code><span class="code-span">Sorry </span> <em class="code-em"> No content!</em> </code>
+  </div>
+
+  <div class="demo">
+      <div class="mainCard">
+        <div class="mainCardHeader"> </div>
+
+        <div class="mainCardContent">
+          <div class="miniCard" *ngFor="let event of events">
+
+              <div class="photo">
+                  <img *ngIf="event.photos.length == 0; else firstPhoto" 
+                  src="https://thumbs.dreamstime.com/b/no-image-available-icon-photo-camera-flat-vector-illustration-132483141.jpg">
+                  <ng-template #firstPhoto>
+                      <img [src]="event.photos | photo" style="height: 300px;" />
+                  </ng-template>
+                </div>
+                
+                <div class="description">
+                  <h2 class="name">{{event.name}}</h2>
+                  <h1>{{event.price}}$</h1>
+                  <p class="p">{{event.description}}</p>
+
+                    <button class="btn btn-delete" (click)="deleteEvent(event.id)">Удалить</button>
+                    <button class="btn btn-edit" [routerLink]="['/event-item', event.id]">Редактировать</button>
+                </div>
+          </div>
+        </div>
+      </div>
+        
+  </div>
+</div>

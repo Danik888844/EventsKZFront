@@ -1,0 +1,193 @@
+@import url("https://fonts.googleapis.com/css?family=Bevan");
+
+.err-p{
+    font-family: "Bevan", cursive;
+    font-size: 130px;
+    margin: 10vh 0 0;
+    text-align: center;
+    letter-spacing: 5px;
+    background-color: black;
+    color: transparent;
+    text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.1);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+}
+
+.err-span{
+    font-size: 1.2em;
+}
+
+
+code {
+    color: #bdbdbd;
+    text-align: center;
+    display: block;
+    font-size: 16px;
+    margin: 0 30px 25px;
+}
+
+.code-span {
+    color: #f0c674;
+}
+
+.code-em {
+    color: #b294bb;
+    font-style: unset;
+}
+
+.demo{
+  width: 100%;
+  height: 100%;
+}
+.penName{
+  text-align: center;
+  font-size: 36px;}
+  
+.mainCard{
+  text-align: center;
+  display: block;
+  margin: 60px auto;
+  background-color: #333;
+  box-shadow: 0 5px 40px rgba(0,0,0,0.2);
+  width: 90%;
+  opacity: 0.95;
+}
+
+.mainCardHeader{
+  background-color: #111111;
+  border: 1px solid #ae850f;
+  height: 100px;
+  width: 100%;
+  opacity: 0.8;
+  text-align: end;
+}
+
+.mainCardContent{
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  top: -50px;
+  height: 100%;
+  width: 90%;
+}
+  
+
+.miniCard{
+  display: inline-block;
+  padding: 5px;
+  margin: 0 20px 20px 0;
+  background-color: #7e7e7e;
+  height: 330px;
+  width: 700px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.miniCard:hover {
+    box-shadow: 0 8px 17px 0 rgba(124, 116, 7, 0.2),0 6px 20px 0 rgba(124, 122, 9, 0.19);
+}
+
+.photo {
+    margin-top: 10px;
+    width: 45%;
+    text-align: center;
+    float: left;
+    border-right: 2px solid #333;
+}
+
+.photo img { 
+  max-height: 300px;
+  max-width: 300px; 
+}
+
+.description {  
+  padding: 30px;
+  float: left;
+  width: 55%;
+}
+
+.p {
+  height: 60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.name{
+  height: 40px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+
+.btn{
+  background-color: #333; 
+  color: #ae850f; 
+  border: 1px solid #ae850f;
+  padding: 2px 16px;
+
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+
+  margin: 0px 10px 0px 0px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius:10%;
+}
+
+.btn-prm:hover{
+    background-color: #ae850f;
+  color: white;
+}
+
+agm-map {
+  height: 300px;
+}
+
+.btn-edit{
+  color: darkorange;
+  border: 1px solid darkorange;
+}
+
+.btn-edit:hover{
+  background-color: darkorange;
+  color: white;
+}
+
+.btn-delete{
+  color: red;
+  border: 1px solid red;
+}
+
+.btn-delete:hover{
+  background-color: red;
+  color: white;
+}
+
+.btn-modal{
+  background-color: white;
+  color: #7e7e7e;
+  border: 1px solid #7e7e7e;
+}
+
+.btn-modal:hover{
+  background-color: white;
+  color: #096dd9;
+  border: 1px solid #096dd9;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  font-size: 20px;
+  display: inline-block;
+  border: 1px solid darkgray;
+  border-radius: 4px;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  color: #222222;
+}

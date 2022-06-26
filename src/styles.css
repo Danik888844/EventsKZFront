@@ -1,1 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('http://fonts.cdnfonts.com/css/salma-pro-medium-narrow');
+body {
+    width: 100%;
+    background: url("https://img.redro.pl/obrazy/modern-background-pattern-dark-wallpaper-texture-seamless-geometric-patter-ideal-for-fabrics-artwork-designs-posters-and-wallpapers-vector-image-background-400-220055047.jpg") center center;
+    font-family: 'Salma Pro', sans-serif;
+    font-size: 20px;
+}

@@ -1,0 +1,90 @@
+<div class="profile">
+    <figure>
+      <img *ngIf="user.gender == 0" src="http://cdn.onlinewebfonts.com/svg/img_529940.png" alt="" />
+      <img *ngIf="user.gender == 1" src="https://www.shareicon.net/data/512x512/2015/12/10/685386_people_512x512.png" alt="" />
+      <img *ngIf="user.gender == 2" src="https://www.seekpng.com/png/full/523-5230720_this-icon-for-gender-neutral-user-is-an.png" alt="" />
+    </figure>
+    <header>
+      <h1>{{user.firstName}} {{user.middleName}}
+        <small>{{role}}</small></h1>
+    </header>
+    
+    <main>
+      <dl>
+        <dt>ФИО</dt>
+          <dd>{{user.firstName}} {{user.middleName}} {{user.lastName}}</dd>
+        <dt>Дата регистрации</dt>
+          <dd>{{user.dateOfReg | date}}</dd>
+        <dt>Количество лет</dt>
+          <dd>{{user.age}}</dd>
+        <dt>Пол</dt>
+          <dd>{{gender}}</dd>
+        <dt>E-mail</dt>
+          <dd>{{user.email}}</dd>
+        <dt>Роль</dt>
+          <dd>{{role}}</dd>
+        <dt>Редактировать профиль</dt>
+            <dd><a (click)="openEdit()">Нажми на меня</a></dd>
+      </dl>
+      <div>
+        <h2>Участвует: </h2>
+
+        <ul *ngFor="let event of events">
+          <li>{{event.name}}</li>
+        </ul>
+        
+        <h2>Участвовал: </h2>
+
+        <ul *ngFor="let event of pastEvents">
+          <li>{{event.name}}</li>
+        </ul>
+      </div>
+    </main>
+
+    <nz-modal [(nzVisible)]="isVisible" nzTitle="Редактирование профиля" (nzOnCancel)="handleCancel()" (nzOnOk)="handleCancel()">
+        <ng-container *nzModalContent>
+
+            <div>
+                <label for="firstname" class="placeholder">Имя</label>
+                <input id="firstname" class="input" type="text" placeholder=" " [value]="user.firstName" required #firstname/>
+              </div>
+      
+              <div>
+                  <label for="middlename" class="placeholder">Фамилия</label>
+                <input id="middlename" class="input" type="text" placeholder=" " [value]="user.middleName" required #middlename/>
+              </div>
+      
+              <div>
+                  <label for="lastname" class="placeholder">Отчество</label>
+                  <input id="lastname" class="input" type="text" placeholder=" " [value]="user.lastName" required #lastname/>
+              </div>
+      
+              <div>
+                <label for="age" class="placeholder">Возраст</label>
+                <input id="age" class="input" type="number" placeholder=" " [value]="user.age" required #age/>
+              </div>
+      
+              <div style="width:200px;">
+                  <select [value]="user.gender" #gender>
+                    <option value="0">Мужчина</option>
+                    <option value="1">Женщина</option>
+                    <option value="2">Другой</option>
+                  </select>
+                </div>
+      
+              <div>
+                <label for="email" class="placeholder">Логин</label>
+                <input id="email" class="input" type="email" placeholder=" " [value]="user.email" required #email/>
+              </div>
+      
+              <div>
+                <label for="password" class="placeholder">Пароль</label>
+                  <input id="password" class="input" type="password" placeholder=" " required #password/>
+                </div>
+
+            <button class="btn btn-modal" style="width: 50%; border-radius:0%;" 
+            (click)="editUser(firstname.value, middlename.value, lastname.value, age.value, gender.value, email.value, password.value)">Редактировать</button>
+        </ng-container>
+    </nz-modal>
+  
+  </div>

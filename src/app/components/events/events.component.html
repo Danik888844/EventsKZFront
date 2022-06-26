@@ -1,0 +1,67 @@
+<div *ngIf="events.length == 0" style="background-color: #333; border: 1px solid #ae850f;">
+  <p class="err-p">HTTP: <span class="err-span">204</span></p>
+  <code><span class="code-span">Sorry </span> <em class="code-em"> No content!</em> </code>
+</div>
+
+<div class="body">
+  <div class="mainCard">
+    <div class="mainCardHeader">
+        <form>
+          <nz-checkbox-wrapper (nzOnChange)="showPast($event)">
+            <label nz-checkbox nzValue="0" style="color: white; font-size: 1vw;" nzChecked="true">Скрыть прошедшие</label>
+          </nz-checkbox-wrapper>
+            <input #searchable style="width: 80%; margin-top: 20px;" placeholder="Что будем искать?" type="text"/>
+            <button class="btn btn-prm" style="font-size: 28px; margin: 0px 20px;" (click)="searchButton(searchable.value)"> Поиск </button>
+        </form> 
+        <button *ngIf="user" class="button_plus" (click)="openCreate()"></button> 
+    </div>
+
+    <div class="mainCardContent">
+      <!--START EVENT CARD-->
+      <div class="miniCard" *ngFor="let event of result">
+
+        <button *ngIf="isAdmin" class="btn btn-delete" (click)="deleteEvent(event.id)">Удалить</button>
+        <button *ngIf="isAdmin" class="btn btn-edit" [routerLink]="['/event-item', event.id]">Редактировать</button>
+
+        <div class="photo">
+          <img *ngIf="event.photos.length == 0; else firstPhoto" 
+          src="https://thumbs.dreamstime.com/b/no-image-available-icon-photo-camera-flat-vector-illustration-132483141.jpg">
+          <ng-template #firstPhoto>
+            <img [src]="event.photos | photo" style="height: 300px;" />
+          </ng-template>
+        </div>
+
+        <div class="description">
+          <h2 class="name">{{event.name}}</h2>
+          <h1>{{event.price}}₸</h1>
+          <p class="p">{{event.description}}</p>
+
+          <button class="btn btn-prm" [routerLink]="['/event-item', event.id]">Информация</button>
+          <button *ngIf="user" class="btn btn-prm" [routerLink]="['/event-item', event.id]">Купить билет</button>
+        </div>
+      </div>
+      <!--END EVENT CARD-->
+    </div>
+
+    <!--START CREATE MODAL-->
+    <nz-modal [(nzVisible)]="isVisible" nzTitle="Создание мероприятия" (nzOnCancel)="handleCancel()" (nzOnOk)="handleCancel()">
+      <ng-container *nzModalContent>
+        <input type="text" placeholder="Название" #name/> <br/>
+        <textarea type="text" placeholder="Описание" #description></textarea> <br/>
+        <input type="file" accept="image/*" (change)="upload($event)" [(ngModel)]="imgInput"/>
+        <button class="btn btn-modal" (click)="removeImage()">Удалить фото</button> <br/>
+        <input type="number" placeholder="Цена за билет" #price/> <br/>
+        <input type="text" placeholder="Номера телефонов через запятую" #numbers/> <br/>
+        
+        <agm-map [latitude]="43" [longitude]="76" id="map" (mapClick)="mapClicked($event.coords.lat, $event.coords.lng)">
+          <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+        </agm-map> <br/>
+
+        <input type="date" #eventDate/> <br/>
+        <button class="btn btn-modal" style="width: 50%; border-radius:0%;" 
+        (click)="createEvent(name.value, description.value, price.value, numbers.value, eventDate.value)">Добавить</button>
+      </ng-container>
+    </nz-modal>
+    <!--END CREATE MODAL-->
+  </div>     
+</div>

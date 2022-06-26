@@ -1,0 +1,19 @@
+<div class="body">
+    <main>
+        <dl *ngFor="let user of users">
+          <dt>{{user.firstName}} {{user.middleName}} {{user.lastName}}</dt>
+
+            <dd><a (click)="deleteUser(user.firstName,user.id)">Удалить</a> 
+                <a (click)="deleteEventWhereUser(user.firstName,user.id)">Удалить все МП</a>
+
+                <select [value]="getRole(user.roles)" #role>
+                    <option value="0">Пользователь</option>
+                    <option value="1">Администратор</option>
+                  </select>
+
+                  <a style="float: right;" (click)="setRole(user.id,role.value)">Сохранить</a>
+            </dd>
+
+        </dl>
+    </main>
+</div>

@@ -1,0 +1,51 @@
+<div class="body">
+    <form class="form">
+        <div class="title">Регистрация</div>
+
+        <div class="input-container ic1">
+          <input id="firstname" class="input" type="text" placeholder=" " required #firstname/>
+          <div class="cut"></div>
+          <label for="firstname" class="placeholder">Имя</label>
+        </div>
+
+        <div class="input-container ic2">
+          <input id="middlename" class="input" type="text" placeholder=" " required #middlename/>
+          <div class="cut"></div>
+          <label for="middlename" class="placeholder">Фамилия</label>
+        </div>
+
+        <div class="input-container ic1">
+            <input id="lastname" class="input" type="text" placeholder=" " required #lastname/>
+            <div class="cut"></div>
+            <label for="lastname" class="placeholder">Отчество</label>
+        </div>
+
+        <div class="input-container ic2">
+        <input id="age" class="input" type="number" placeholder=" " required #age/>
+        <div class="cut"></div>
+        <label for="age" class="placeholder">Возраст</label>
+        </div>
+
+        <div class="input-container ic2" style="width:200px;">
+            <select class="custom-select" #gender>
+              <option value="0">Мужчина</option>
+              <option value="1">Женщина</option>
+              <option value="2">Другой</option>
+            </select>
+          </div>
+
+        <div class="input-container ic2">
+          <input id="email" class="input" type="email" placeholder=" " required #email/>
+          <div class="cut cut-short"></div>
+          <label for="email" class="placeholder">Логин</label>
+        </div>
+
+        <div class="input-container ic2">
+            <input id="password" class="input" type="password" placeholder=" " required #password/>
+            <div class="cut cut-short"></div>
+            <label for="password" class="placeholder">Пароль</label>
+          </div>
+
+        <button type="submit" class="submit" (click)="register(firstname.value, middlename.value, lastname.value, age.value, gender.value, email.value, password.value)">Зарегестрироваться</button>
+    </form>
+</div>
